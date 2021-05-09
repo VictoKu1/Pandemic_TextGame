@@ -13,6 +13,12 @@ protected:
   Board board;
   set<City> cards;
   City currentLoc;
+
+  bool hasCard(City city);
+  int numOfCards(Color color);
+  void discard(Color color, int amount);
+  bool cureExist(City city);
+  void useCure(City city) ;
 public:
   Player(Board &board,City currentLoc):board(board),currentLoc(currentLoc){}
   virtual ~Player(){}
@@ -26,11 +32,6 @@ public:
   Player& take_card(City city);
   virtual string role(); //*For everyone special implemetation .
   Player& remove_cards();
-private :
-  bool hasCard(City city);
-  int numOfCards(Color color);
-  void discard(Color color, int amount);
-  bool cureExist(City city);
-  void useCure(City city) ;
+  virtual void move(City city);
 };
 } // namespace pandemic

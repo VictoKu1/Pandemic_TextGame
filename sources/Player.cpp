@@ -6,31 +6,43 @@ using namespace std;
 namespace pandemic {
 bool Player::hasCard(City city) { return (cards.count(city) != 0); }
 Player &Player::drive(City city) {
+  if(currentLoc == city){
+    throw invalid_argument{"You cant move from the city to itself ."};
+  }
   if (board.isConnected(currentLoc, city)) {
-    currentLoc = city;
+    move(city);
     return *this;
   }
   return *this;
 }
 Player &Player::fly_direct(City city) {
+  if(currentLoc == city){
+    throw invalid_argument{"You cant move from the city to itself ."};
+  }
   if (!hasCard(city)) {
-    throw invalid_argument{"You dont have the card of " + Board::toString(city) +
-                           "."};
+    throw invalid_argument{"You dont have the card of " +
+                           Board::toString(city) + "."};
   }
   cards.erase(city);
-  currentLoc = city;
+  move(city);
   return *this;
 }
 Player &Player::fly_charter(City city) {
+  if(currentLoc == city){
+    throw invalid_argument{"You cant move from the city to itself ."};
+  }
   if (!hasCard(currentLoc)) {
     throw invalid_argument{"You dont have the " + Board::toString(currentLoc) +
                            " card (the card of the city you are in) ."};
   }
   cards.erase(currentLoc);
-  currentLoc = city;
+  move(city);
   return *this;
 }
 Player &Player::fly_shuttle(City city) {
+  if(currentLoc == city){
+    throw invalid_argument{"You cant move from the city to itself ."};
+  }
   if (!board.labExists(currentLoc)) {
     throw invalid_argument{"There is no research station in " +
                            Board::toString(currentLoc) + "."};
@@ -39,7 +51,7 @@ Player &Player::fly_shuttle(City city) {
     throw invalid_argument{"There is no research station in " +
                            Board::toString(city) + "."};
   }
-  currentLoc = city;
+  move(city);
   return *this;
 }
 Player &Player::build() {
@@ -51,7 +63,7 @@ Player &Player::build() {
   return *this;
 }
 Player &Player::discover_cure(Color color) {
-  if (board.labExists(currentLoc)) {
+  if (!board.labExists(currentLoc)) {
     throw invalid_argument{"There is no research station in " +
                            Board::toString(currentLoc) + "."};
   }
@@ -120,7 +132,10 @@ bool Player::cureExist(City city) {
 }
 
 void Player::useCure(City city) {
-  board.getCureArray().at(board.colorOf(city))--;
   board[city] = 0;
 }
+
+void Player::move(City city) { 
+  
+  currentLoc = city; }
 } // namespace pandemic

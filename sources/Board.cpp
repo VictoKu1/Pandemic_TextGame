@@ -7,7 +7,7 @@ ostream &operator<<(ostream &os, const Board &board) {
   return (os << "TODO." << endl);
 }
 bool Board::is_clean() {
-  for (auto &place : (*this).loc) {
+  for (auto &place : loc) {
     if (place.second.numOfCubes > 0) {
       return false;
     }
@@ -17,15 +17,15 @@ bool Board::is_clean() {
 bool Board::isConnected(City from, City to) {
   return (loc[from].connections.count(to) != 0);
 }
-bool Board::labExists(City city) { return (*this).loc[city].laboratoryEx; }
-void Board::makeLab(City city) { (*this).loc[city].laboratoryEx = true; }
+bool Board::labExists(City city) { return loc[city].laboratoryEx; }
+void Board::makeLab(City city) { loc[city].laboratoryEx = true; }
 void Board::remove_cures() {
-  for (auto &place : (*this).loc) {
+  for (auto &place : loc) {
     place.second.numOfCubes = place.second.originalCubeNum + 0;
   }
 }
 void Board::remove_stations() {
-  for (auto &place : (*this).loc) {
+  for (auto &place : loc) {
     place.second.laboratoryEx = false;
   }
 }

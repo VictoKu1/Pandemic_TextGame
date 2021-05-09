@@ -2,7 +2,7 @@
 using namespace std;
 namespace pandemic {
 Player &OperationsExpert::build() {
-  //*TODO.
+  board.makeLab(currentLoc);
   return *this;
 }
 string OperationsExpert::role() { return "OperationsExpert"; }
