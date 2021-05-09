@@ -197,5 +197,4 @@ string Board::toString(Color color) {
 Color Board::colorOf(City city) { return loc[city].color; }
 void Board::addCure(Color color) { cures.at(color)++; }
 array<int, 4> Board::getCureArray() { return cures; }
-
 } // namespace pandemic
