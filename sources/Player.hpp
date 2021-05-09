@@ -15,7 +15,7 @@ protected:
   City currentLoc;
 public:
   Player(Board &board,City currentLoc):board(board),currentLoc(currentLoc){}
-  virtual~Player(){}
+  virtual ~Player(){}
   Player& drive(City city);
   virtual Player& fly_direct(City city); //* For special dispatcher implementation .  
   Player& fly_charter(City city);
@@ -24,7 +24,13 @@ public:
   virtual Player& discover_cure(Color color); //*For special Scientist/Researcher and GeneSplicer implementation .
   virtual Player& treat(City city); //*For special Medic/Virologist and FieldDoctor implementation .
   Player& take_card(City city);
-  virtual string role()=0; //*For everyone special implemetation .
+  virtual string role(); //*For everyone special implemetation .
+  Player& remove_cards();
+private :
   bool hasCard(City city);
+  int numOfCards(Color color);
+  void discard(Color color, int amount);
+  bool cureExist(City city);
+  void useCure(City city) ;
 };
 } // namespace pandemic
