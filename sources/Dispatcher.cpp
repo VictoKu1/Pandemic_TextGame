@@ -2,7 +2,10 @@
 using namespace std;
 namespace pandemic {
 Player &Dispatcher::fly_direct(City city) {
-  if (board.labExists(city)) {
+   if(currentLoc == city){
+    throw invalid_argument{"You cant move from the city to itself ."};
+  }
+  if (board.labExists(currentLoc)) {
     currentLoc = city;
   } else {
     if (!hasCard(city)) {

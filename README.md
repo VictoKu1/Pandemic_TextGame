@@ -105,9 +105,11 @@
 
 <div dir='ltr'>
 
-	make test && ./test
-   make tidy
-   make valgrind
+	make test1 && ./test1
+	make test2 && ./test2
+	make test3 && ./test3
+	make tidy
+	make valgrind
 
 </div>
 

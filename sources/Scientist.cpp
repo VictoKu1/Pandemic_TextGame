@@ -2,7 +2,7 @@
 using namespace std;
 namespace pandemic {
 Player &Scientist::discover_cure(Color color) {
-  if (board.labExists(currentLoc)) {
+  if (!board.labExists(currentLoc)) {
     throw invalid_argument{"There is no research station in " +
                            Board::toString(currentLoc) + "."};
   }

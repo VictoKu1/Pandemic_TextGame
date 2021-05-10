@@ -16,7 +16,7 @@ Player &Virologist::treat(City city) {
   if (cureExist(city)) {
     useCure(city);
   } else {
-    board[city]--;
+    board[city]-=1;
   }
   return *this;
 }

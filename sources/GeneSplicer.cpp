@@ -25,7 +25,7 @@ void GeneSplicer::discard(int amount) {
   for (const auto &city : clearList) {
     if (amount > 0) {
       cards.erase(city);
-      amount--;
+      amount-=1;
     } else {
       return;
     }

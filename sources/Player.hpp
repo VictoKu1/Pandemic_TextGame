@@ -10,7 +10,7 @@ using namespace std;
 namespace pandemic {
 class Player {
 protected:
-  Board board;
+  Board &board;
   set<City> cards;
   City currentLoc;
 

@@ -2,7 +2,8 @@
 #include <stdexcept>
 using namespace std;
 namespace pandemic {
-int &Board::operator[](City city) { return loc[city].numOfCubes; }
+int &Board::operator[](City city) { 
+  return loc[city].numOfCubes; }
 ostream &operator<<(ostream &os, const Board &board) {
   return (os << "TODO." << endl);
 }
@@ -21,7 +22,7 @@ bool Board::labExists(City city) { return loc[city].laboratoryEx; }
 void Board::makeLab(City city) { loc[city].laboratoryEx = true; }
 void Board::remove_cures() {
   for (auto &place : loc) {
-    place.second.numOfCubes = place.second.originalCubeNum + 0;
+    cures.fill(0);
   }
 }
 void Board::remove_stations() {
@@ -172,6 +173,9 @@ string Board::toString(City city) {
   case Tokyo:
     return "Tokyo";
     break;
+  case Washington:
+    return "Washington";
+    break;
   default:
     throw invalid_argument{"Unknown City Error."};
   }
@@ -195,6 +199,6 @@ string Board::toString(Color color) {
   }
 }
 Color Board::colorOf(City city) { return loc[city].color; }
-void Board::addCure(Color color) { cures.at(color)++; }
-array<int, 4> Board::getCureArray() { return cures; }
+void Board::addCure(Color color) { cures.at(color)+=1; }
+array<int, 4>& Board::getCureArray() { return cures; }
 } // namespace pandemic

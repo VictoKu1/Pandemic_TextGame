@@ -15,7 +15,7 @@ public:
   bool laboratoryEx;
   Color color;
   int numOfCubes;
-  int originalCubeNum;
+  //*int originalCubeNum;
   Location() {
     // connections = {};
     // color = Blue;
@@ -61,7 +61,7 @@ class Board {
       {London, {Blue, {NewYork, Madrid, Essen, Paris}}},
       {LosAngeles, {Yellow, {SanFrancisco, Chicago, MexicoCity, Sydney}}},
       {Madrid, {Blue, {London, NewYork, Paris, SaoPaulo, Algiers}}},
-      {Manila, {Red, {Taipei, SanFrancisco, HoChiMinhCity, Sydney}}},
+      {Manila, {Red, {Taipei, SanFrancisco, HoChiMinhCity, Sydney, HongKong}}},
       {MexicoCity, {Yellow, {LosAngeles, Chicago, Miami, Lima, Bogota}}},
       {Miami, {Yellow, {Atlanta, MexicoCity, Washington, Bogota}}},
       {Milan, {Blue, {Essen, Paris, Istanbul}}},
@@ -86,7 +86,7 @@ class Board {
   array<int, 4> cures;
 
 public:
-  Board() {}
+  Board() { cures.fill(0); }
   ~Board() {}
   int &operator[](City c);
   friend ostream &operator<<(ostream &os, const Board &board);
@@ -100,6 +100,6 @@ public:
   static string toString(Color color);
   Color colorOf(City city);
   void addCure(Color color);
-  array<int, 4> getCureArray();
+  array<int, 4> &getCureArray();
 };
 } // namespace pandemic
