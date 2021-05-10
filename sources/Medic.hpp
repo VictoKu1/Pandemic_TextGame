@@ -1,4 +1,3 @@
-//* Just sketches nothing smart here.
 #pragma once
 #include "Board.hpp"
 #include "City.hpp"
@@ -18,3 +17,12 @@ public:
   void move(City city) override;
 };
 } // namespace pandemic
+
+
+
+
+
+
+
+
+

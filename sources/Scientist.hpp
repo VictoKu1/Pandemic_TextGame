@@ -1,4 +1,3 @@
-//* Just sketches nothing smart here.
 #pragma once
 #include "Board.hpp"
 #include "City.hpp"

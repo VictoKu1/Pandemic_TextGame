@@ -1,4 +1,3 @@
-//* Just sketches nothing smart here.
 #pragma once
 #include "Board.hpp"
 #include "City.hpp"
@@ -17,3 +16,5 @@ public:
   string role() override;
 };
 } // namespace pandemic
+
+
