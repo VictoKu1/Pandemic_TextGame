@@ -9,28 +9,22 @@
 #include <string>
 using namespace std;
 namespace pandemic {
-class Location {
-public:
-  set<City> connections;
-  bool laboratoryEx;
-  Color color;
-  int numOfCubes;
-  //*int originalCubeNum;
-  Location() {
-    // connections = {};
-    // color = Blue;
-    // laboratoryEx = false;
-    // numOfCubes = 0;
-    // originalCubeNum = 0;
-  }
-  Location(Color color, set<City> connections)
-      : color{color}, connections{move(connections)} {
-    laboratoryEx = false;
-    numOfCubes = 0;
-  }
-};
 
 class Board {
+  class Location {
+  public:
+    set<City> connections;
+    bool laboratoryEx;
+    Color color;
+    int numOfCubes;
+    //*int originalCubeNum;
+    Location() {}
+    Location(Color color, set<City> connections)
+        : color{color}, connections{move(connections)} {
+      laboratoryEx = false;
+      numOfCubes = 0;
+    }
+  };
   map<City, Location> loc{
       {Algiers, {Black, {Madrid, Paris, Istanbul, Cairo}}},
       {Atlanta, {Blue, {Chicago, Miami, Washington}}},
