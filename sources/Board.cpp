@@ -2,8 +2,7 @@
 #include <stdexcept>
 using namespace std;
 namespace pandemic {
-int &Board::operator[](City city) { 
-  return loc[city].numOfCubes; }
+int &Board::operator[](City city) { return loc[city].numOfCubes; }
 ostream &operator<<(ostream &os, const Board &board) {
   return (os << "TODO." << endl);
 }
@@ -199,6 +198,6 @@ string Board::toString(Color color) {
   }
 }
 Color Board::colorOf(City city) { return loc[city].color; }
-void Board::addCure(Color color) { cures.at(color)+=1; }
-array<int, 4>& Board::getCureArray() { return cures; }
+void Board::addCure(Color color) { cures.at(color) += 1; }
+array<int, 4> &Board::getCureArray() { return cures; }
 } // namespace pandemic
