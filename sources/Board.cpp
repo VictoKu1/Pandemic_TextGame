@@ -1,10 +1,24 @@
 #include "Board.hpp"
+#include "City.hpp"
+#include <ios>
 #include <stdexcept>
 using namespace std;
 namespace pandemic {
 int &Board::operator[](City city) { return loc[city].numOfCubes; }
 ostream &operator<<(ostream &os, const Board &board) {
-  return (os << "TODO." << endl);
+  os << "Board data :" << endl;
+  for (const auto &c : board.loc) {
+    os << "City: " << Board::toString(c.first)
+       << "\nResearch lab existance status: " << boolalpha
+       << c.second.laboratoryEx << noboolalpha
+       << ".\n Illness type: " << Board::toString(c.second.color)
+       << "\n Illness level : " << to_string(c.second.numOfCubes) << endl;
+  }
+  os << "Cures found :"
+     << "\n Blue:" << board.cures.at(Blue)
+     << "\n Black:" << board.cures.at(Black) << "\n Red:" << board.cures.at(Red)
+     << "\n Yellow:" << board.cures.at(Yellow) << endl;
+  return os;
 }
 bool Board::is_clean() {
   for (auto &place : loc) {
