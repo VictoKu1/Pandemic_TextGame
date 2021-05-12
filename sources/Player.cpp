@@ -4,6 +4,8 @@
 #include <stdexcept>
 using namespace std;
 namespace pandemic {
+
+//*Implementation of output stream operator for Player class .
 ostream &operator<<(ostream &os, const Player &player) {
   os << "Cards :\n_____________________________________\n" << endl;
   for (const auto &city : player.cards) {
@@ -15,7 +17,14 @@ ostream &operator<<(ostream &os, const Player &player) {
   os<<"\n"<<endl;
   return os;
 }
+
+//*Boolean method that tells if the player has a card of a specific city .
 bool Player::hasCard(City city) { return (cards.count(city) != 0); }
+
+
+//*Implemenation of a standart player interface methods.
+
+
 Player &Player::drive(City city) {
   if (currentLoc == city) {
     throw invalid_argument{"You cant move from the city to itself ."};
@@ -26,6 +35,8 @@ Player &Player::drive(City city) {
   move(city);
   return *this;
 }
+
+
 Player &Player::fly_direct(City city) {
   if (currentLoc == city) {
     throw invalid_argument{"You cant move from the city to itself ."};
@@ -38,6 +49,7 @@ Player &Player::fly_direct(City city) {
   move(city);
   return *this;
 }
+
 Player &Player::fly_charter(City city) {
   if (currentLoc == city) {
     throw invalid_argument{"You cant move from the city to itself ."};
@@ -109,11 +121,12 @@ Player &Player::take_card(City city) {
   cards.insert(city);
   return *this;
 }
-string Player::role() { return "Player."; }
+string Player::role() { return ""; }
 Player &Player::remove_cards() {
   cards.clear();
   return *this;
 }
+//*Returns number of cards a player hold with specific color .
 int Player::numOfCards(Color color) {
   int counter = 0;
   for (const auto &city : cards) {
@@ -123,6 +136,8 @@ int Player::numOfCards(Color color) {
   }
   return counter;
 }
+
+//*Helping method which takes out specific amount of cards with specific color.
 void Player::discard(Color color, int amount) {
   set<City> clearList;
   for (const auto &city : cards) {
@@ -139,12 +154,14 @@ void Player::discard(Color color, int amount) {
     }
   }
 }
+//*Boolean method which tells if a cure exist for given city.
 bool Player::cureExist(City city) {
   return (board.getCureArray().at(board.colorOf(city)) > 0);
 }
-
+//*Using cure nullifies the number of infection cubes in specific city.
 void Player::useCure(City city) { board[city] = 0; }
 
+//*Intuitive implementation, basically exist for manipulation through inheritance .
 void Player::move(City city) { currentLoc = city; }
 } // namespace pandemic
 
