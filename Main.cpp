@@ -17,7 +17,6 @@ const int INT_MAX = 2147483647;
 #include <istream>
 #include <map>
 #include <set>
-#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <unistd.h>
