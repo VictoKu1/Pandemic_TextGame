@@ -6,7 +6,7 @@ using namespace std;
 namespace pandemic {
 ostream &operator<<(ostream &os, const Player &player) {
   os << "Cards :\n_____________________________________\n" << endl;
-  for (auto &city : player.cards) {
+  for (const auto &city : player.cards) {
     os << Board::toString(city) << endl;
   }
   os<<"\n"<<endl;
@@ -147,3 +147,12 @@ void Player::useCure(City city) { board[city] = 0; }
 
 void Player::move(City city) { currentLoc = city; }
 } // namespace pandemic
+
+
+
+
+
+
+
+
+

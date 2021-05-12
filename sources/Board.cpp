@@ -11,7 +11,7 @@ ostream &operator<<(ostream &os, const Board::Location &loc) {
      << noboolalpha << ".\n Illness type: " << Board::toString(loc.color)
      << "\n Illness level : " << to_string(loc.numOfCubes) << endl;
   os << "Connections: " << endl;
-  for (auto &p : loc.connections) {
+  for (const auto &p : loc.connections) {
     os << Board::toString(p) << endl;
   }
   os << "\n" << endl;
@@ -43,7 +43,7 @@ ostream &operator<<(ostream &os, const Board &board) {
 
 //*Boolean method which tells if all the cubes on the board is equal to 0.
 bool Board::is_clean() {
-  for (auto &place : loc) {
+  for (const auto &place : loc) {
     if (place.second.numOfCubes > 0) {
       return false;
     }
@@ -259,9 +259,10 @@ array<int, 4> &Board::getCureArray() { return cures; }
 //*Method returns number or remained cubes on the board.
 int Board::numOfCubes() {
   int counter = 0;
-  for (auto &place : loc) {
+  for (const auto &place : loc) {
     counter += place.second.numOfCubes;
   }
   return counter;
 }
 } // namespace pandemic
+
