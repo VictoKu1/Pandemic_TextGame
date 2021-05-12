@@ -4,22 +4,36 @@
 #include <stdexcept>
 using namespace std;
 namespace pandemic {
+
+//*Printing function implemetation for Location subclass .
+ostream &operator<<(ostream &os, const Board::Location &loc) {
+  return (os << "\n Research lab existance status: " << boolalpha
+             << loc.laboratoryEx << noboolalpha
+             << ".\n Illness type: " << Board::toString(loc.color)
+             << "\n Illness level : " << to_string(loc.numOfCubes) << endl);
+}
+
+//*Function which returns a refference to the number of cubes in a cpecific city parameter.
 int &Board::operator[](City city) { return loc[city].numOfCubes; }
+
+//*Printing function implemetation .
 ostream &operator<<(ostream &os, const Board &board) {
   os << "Board data :" << endl;
   for (const auto &c : board.loc) {
-    os << "City: " << Board::toString(c.first)
-       << "\nResearch lab existance status: " << boolalpha
-       << c.second.laboratoryEx << noboolalpha
-       << ".\n Illness type: " << Board::toString(c.second.color)
-       << "\n Illness level : " << to_string(c.second.numOfCubes) << endl;
+    os << "_________________________________________________\n"
+       << "City: " << Board::toString(c.first) << c.second << endl;
   }
-  os << "Cures found :"
-     << "\n Blue:" << board.cures.at(Blue)
-     << "\n Black:" << board.cures.at(Black) << "\n Red:" << board.cures.at(Red)
-     << "\n Yellow:" << board.cures.at(Yellow) << endl;
+  os << "_________________________________________________\n"
+     << "Cures found :"
+     << "\n Blue: " << board.cures.at(Blue)
+     << "\n Black: " << board.cures.at(Black)
+     << "\n Red: " << board.cures.at(Red)
+     << "\n Yellow: " << board.cures.at(Yellow) << endl;
+  os << "_________________________________________________" << endl;
   return os;
 }
+
+//*Boolean method which tells if all the cubes on the board is equal to 0.
 bool Board::is_clean() {
   for (auto &place : loc) {
     if (place.second.numOfCubes > 0) {
@@ -28,21 +42,29 @@ bool Board::is_clean() {
   }
   return true;
 }
+
+//*Method which tells if two of the given cities has a connection between them .
 bool Board::isConnected(City from, City to) {
   return (loc[from].connections.count(to) != 0);
 }
+
+//*Boolean method which tells if a given city has a builded lab in it .
 bool Board::labExists(City city) { return loc[city].laboratoryEx; }
+
+//*Method which builds a research lab in the given city .
 void Board::makeLab(City city) { loc[city].laboratoryEx = true; }
-void Board::remove_cures() {
-  for (auto &place : loc) {
-    cures.fill(0);
-  }
-}
+
+//*Method which nullifies the number of the founded cures.
+void Board::remove_cures() { cures.fill(0); }
+
+//*Method which nullifies all of the builded labs .
 void Board::remove_stations() {
   for (auto &place : loc) {
     place.second.laboratoryEx = false;
   }
 }
+
+//* Static method which returns for each city enum value its relevant string value .
 string Board::toString(City city) {
   switch (city) {
   case Algiers:
@@ -193,6 +215,8 @@ string Board::toString(City city) {
     throw invalid_argument{"Unknown City Error."};
   }
 }
+
+//*Static method which returns to each given color enum value its relevant string value .
 string Board::toString(Color color) {
   switch (color) {
   case (Blue):
@@ -211,7 +235,13 @@ string Board::toString(Color color) {
     throw invalid_argument{"Unknown Name Error."};
   }
 }
+
+//*Method which returns color enum value for the given city .
 Color Board::colorOf(City city) { return loc[city].color; }
+
+//*Method which promotes the number of the founded cures.
 void Board::addCure(Color color) { cures.at(color) += 1; }
+
+//*Method which returns a reference to the array which represends a number of the founded cures for each disease.
 array<int, 4> &Board::getCureArray() { return cures; }
 } // namespace pandemic

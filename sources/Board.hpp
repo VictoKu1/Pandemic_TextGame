@@ -9,7 +9,6 @@
 #include <string>
 using namespace std;
 namespace pandemic {
-
 class Board {
   class Location {
   public:
@@ -17,7 +16,6 @@ class Board {
     bool laboratoryEx;
     Color color;
     int numOfCubes;
-    //*int originalCubeNum;
     Location() {}
     Location(Color color, set<City> connections)
         : color{color}, connections{move(connections)} {
@@ -78,10 +76,10 @@ class Board {
       {Tokyo, {Red, {Seoul, Shanghai, Osaka, SanFrancisco}}},
       {Washington, {Blue, {Atlanta, NewYork, Montreal, Miami}}}};
   array<int, 4> cures;
-
 public:
   Board() { cures.fill(0); }
   ~Board() {}
+  friend ostream &operator<<(ostream &os, const Location &loc);
   int &operator[](City c);
   friend ostream &operator<<(ostream &os, const Board &board);
   bool is_clean();
