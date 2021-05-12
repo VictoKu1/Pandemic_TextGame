@@ -24,6 +24,7 @@ public:
       : board(board), currentLoc(currentLoc) {}
   virtual ~Player() {}
   Player &drive(City city);
+  friend ostream &operator<<(ostream &os, const Player &player);
   virtual Player &
   fly_direct(City city); //* For special dispatcher implementation .
   Player &fly_charter(City city);
@@ -31,13 +32,15 @@ public:
   virtual Player &build(); //*For special OperationExpert implementation .
   virtual Player &
   discover_cure(Color color);       //*For special Scientist/Researcher and
-                                    //GeneSplicer implementation .
+                                    // GeneSplicer implementation .
   virtual Player &treat(City city); //*For special Medic/Virologist and
-                                    //FieldDoctor implementation .
+                                    // FieldDoctor implementation .
   Player &take_card(City city);
   virtual string role(); //*For everyone special implemetation .
   Player &remove_cards();
   virtual void move(City city);
   City getLocation() { return currentLoc; }
+  bool hasCards() { return !(cards.empty()); }
+  int numOfCards() { return cards.size(); }
 };
 } // namespace pandemic

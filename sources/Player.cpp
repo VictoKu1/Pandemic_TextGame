@@ -4,6 +4,17 @@
 #include <stdexcept>
 using namespace std;
 namespace pandemic {
+ostream &operator<<(ostream &os, const Player &player) {
+  os << "Cards :\n_____________________________________\n" << endl;
+  for (auto &city : player.cards) {
+    os << Board::toString(city) << endl;
+  }
+  os<<"\n"<<endl;
+  os << "Location :\n_____________________________________\n" << endl;
+  os << Board::toString(player.currentLoc) << endl;
+  os<<"\n"<<endl;
+  return os;
+}
 bool Player::hasCard(City city) { return (cards.count(city) != 0); }
 Player &Player::drive(City city) {
   if (currentLoc == city) {

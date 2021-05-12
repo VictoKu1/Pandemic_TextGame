@@ -93,5 +93,6 @@ public:
   Color colorOf(City city);
   void addCure(Color color);
   array<int, 4> &getCureArray();
+  int numOfCubes();
 };
 } // namespace pandemic

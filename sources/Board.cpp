@@ -7,13 +7,20 @@ namespace pandemic {
 
 //*Printing function implemetation for Location subclass .
 ostream &operator<<(ostream &os, const Board::Location &loc) {
-  return (os << "\n Research lab existance status: " << boolalpha
-             << loc.laboratoryEx << noboolalpha
-             << ".\n Illness type: " << Board::toString(loc.color)
-             << "\n Illness level : " << to_string(loc.numOfCubes) << endl);
+  os << "\n Research lab existance status: " << boolalpha << loc.laboratoryEx
+     << noboolalpha << ".\n Illness type: " << Board::toString(loc.color)
+     << "\n Illness level : " << to_string(loc.numOfCubes) << endl;
+  os << "Connections: " << endl;
+  for (auto &p : loc.connections) {
+    os << Board::toString(p) << endl;
+  }
+  os << "\n" << endl;
+  return os;
 }
 
-//*Function which returns a refference to the number of cubes in a cpecific city parameter.
+//*Function which returns a refference to the number of cubes in a cpecific city
+// parameter.
+
 int &Board::operator[](City city) { return loc[city].numOfCubes; }
 
 //*Printing function implemetation .
@@ -22,6 +29,7 @@ ostream &operator<<(ostream &os, const Board &board) {
   for (const auto &c : board.loc) {
     os << "_________________________________________________\n"
        << "City: " << Board::toString(c.first) << c.second << endl;
+    os << "Connections: " << endl;
   }
   os << "_________________________________________________\n"
      << "Cures found :"
@@ -64,7 +72,8 @@ void Board::remove_stations() {
   }
 }
 
-//* Static method which returns for each city enum value its relevant string value .
+//* Static method which returns for each city enum value its relevant string
+// value .
 string Board::toString(City city) {
   switch (city) {
   case Algiers:
@@ -216,7 +225,8 @@ string Board::toString(City city) {
   }
 }
 
-//*Static method which returns to each given color enum value its relevant string value .
+//*Static method which returns to each given color enum value its relevant
+// string value .
 string Board::toString(Color color) {
   switch (color) {
   case (Blue):
@@ -242,6 +252,16 @@ Color Board::colorOf(City city) { return loc[city].color; }
 //*Method which promotes the number of the founded cures.
 void Board::addCure(Color color) { cures.at(color) += 1; }
 
-//*Method which returns a reference to the array which represends a number of the founded cures for each disease.
+//*Method which returns a reference to the array which represends a number of
+// the founded cures for each disease.
 array<int, 4> &Board::getCureArray() { return cures; }
+
+//*Method returns number or remained cubes on the board.
+int Board::numOfCubes() {
+  int counter = 0;
+  for (auto &place : loc) {
+    counter += place.second.numOfCubes;
+  }
+  return counter;
+}
 } // namespace pandemic
